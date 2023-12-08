@@ -22,32 +22,44 @@ const Cashback = {
     this.report.push(history);
   },
 };
-// --------------------------------------------------------------
+
+let changedNumber;
+let historyShown = false; //false because the history hasn't been shown yet.
+
+// Event listener for the first button
 btncalcCash.addEventListener("click", function () {
   const value = inpt.value;
-  const calcCashFunc = Cashback.calcCash(Number(value));
-  showCash.innerHTML = calcCashFunc;
-  inpt.value = "";
+  if (value && value != 0 && value > 0) {
+    changedNumber = Number(value);
+    const calcCashFunc = Cashback.calcCash(changedNumber);
+    showCash.innerHTML = calcCashFunc;
+    historyShown = false; // Reset the flag when the input changes
+  } else {
+    confirm("please enter a valid number");
+  }
 });
-// ----------------------------------------------------------------
-btnshowCashbackList.addEventListener("click", function () {
-  const value = inpt.value;
-  Cashback.showCashbackList(Number(value));
-  const cashList = Cashback.report
-    .map(
-      (item, index) => `
-    <tr>
-        <th scope="row">${index + 1}</th>
-        <td class="text-success">${item.amount}</td>
-        <td class="text-success">${item.cash}</td>
-        <td>${item.date.getFullYear()}/${
-        item.date.getMonth() + 1
-      }/${item.date.getDate()}</td>
-      </tr>
-      `
-    )
-    .join("");
-  listShow.innerHTML = cashList;
 
-  inpt.value = "";
+// Event listener for the second button
+btnshowCashbackList.addEventListener("click", function () {
+  // Check if the history has already been shown
+  if (!historyShown && changedNumber !== undefined) {
+    Cashback.showCashbackList(changedNumber);
+    const cashList = Cashback.report
+      .map(
+        (item, index) => `
+          <tr>
+            <th scope="row">${index + 1}</th>
+            <td class="text-success">${item.amount}</td>
+            <td class="text-success">${item.cash}</td>
+            <td>${item.date.getFullYear()}/${
+          item.date.getMonth() + 1
+        }/${item.date.getDate()}</td>
+          </tr>
+        `
+      )
+      .join("");
+    listShow.innerHTML = cashList;
+    inpt.value = "";
+    historyShown = true; // Set the flag to true after showing the history
+  }
 });

@@ -9,7 +9,7 @@
 .cash-title {
   text-shadow: 1px 1px 0px rgb(184, 54, 201);
   color: rgb(131, 34, 131);
-  font-size: 5rem;
+  font-size: 4rem;
 }
 /*------------------------------------------------*/
 .input {
@@ -39,7 +39,7 @@ input::placeholder {
 .btn-cash {
   background-color: black;
   display: inline-block;
-  padding: 15px 25px;
+  padding: 0.625rem 0.625rem;
   font-size: 24px;
   cursor: pointer;
   text-align: center;
@@ -54,7 +54,7 @@ input::placeholder {
 .btn-history {
   background-color: rgb(143, 40, 143);
   display: inline-block;
-  padding: 15px 25px;
+  padding: 0.625rem 0.625rem;
   font-size: 24px;
   cursor: pointer;
   text-align: center;
